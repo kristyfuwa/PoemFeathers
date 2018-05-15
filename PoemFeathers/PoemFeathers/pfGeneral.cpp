@@ -51,4 +51,24 @@ namespace PoemFeathers
 			SameSide(C, A, B, P);
 	}
 
+
+	int SameNumber(pfVector2 beginPoint, pfVector2 endPoint, pfVector2 point)
+	{
+		//假定边的头是（X+dX, Y+dY），尾是（X, Y）
+		//计算这3条边的方程：E(x, y) = dY(x - X) - dX(y - Y)
+			//展开之后是dY*x + (-dX)*y + (dX*Y - dY*X) = 0
+			//即Ax + By + C = 0
+			//其中A = dY, B = -dX, C = dX*Y - dY*X
+		float A = endPoint.GetY() - beginPoint.GetY();
+		float B = -(endPoint.GetX() - beginPoint.GetX());
+		float C = -B*beginPoint.GetY() - A*beginPoint.GetX();
+		return A*point.GetX() + B*point.GetY() + C;
+	}
+
+	bool PointInTriangleOnScreen(pfVector2 A, pfVector2 B, pfVector2 C, pfVector2 P)
+	{
+		return ((SameNumber(A, B, P) > 0) && (SameNumber(A, C, P) > 0) && (SameNumber(B, C, P) > 0)) ||
+			((SameNumber(A, B, P) < 0) && (SameNumber(A, C, P) < 0) && (SameNumber(B, C, P) < 0)) || ((SameNumber(A, B, P) == 0 && SameNumber(A, C, P) == 0)) ||
+			((SameNumber(A, B, P) == 0 && SameNumber(B, C, P) == 0)) || ((SameNumber(B, C, P) == 0 && SameNumber(A, C, P) == 0));
+	}
 }

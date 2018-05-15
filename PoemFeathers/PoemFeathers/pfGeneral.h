@@ -6,4 +6,8 @@ namespace PoemFeathers
 	pfCore_API bool SameSide(pfVector3 A, pfVector3 B, pfVector3 C, pfVector3 P);
 
 	pfCore_API bool PointInTriangle(pfVector3 A, pfVector3 B, pfVector3 C, pfVector3 P);
+
+	pfCore_API int SameNumber(pfVector2 A, pfVector2 B, pfVector2 C, pfVector2 P);
+
+	pfCore_API bool PointInTriangleOnScreen(pfVector2 A, pfVector2 B, pfVector2 C, pfVector2 P);
 }
